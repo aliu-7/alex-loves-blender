@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painterly / Randomized Stroke Bake Filter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Painterly / Randomized Stroke Bake Filter</h1>
+      <p>
+        Upload a baked image (albedo, mask, normal map, etc.) and convert it into a
+        blocky, painterly texture with randomized strokes. Designed for quickly
+        generating stylized paint layers for 3D materials and texture bakes.
+      </p>
+    </header>
+
+    <main class="app-main">
+      <!-- Filter list container – easy to extend with more filters later -->
+      <section class="filter-card">
+        <div class="filter-header">
+          <h2>Painterly Stroke Filter</h2>
+          <p>
+            Posterizes colors and re-renders the image using thousands of randomized
+            rectangular brush dabs, keeping your original color regions but giving
+            them a hand-painted look.
+          </p>
+        </div>
+
+        <div class="filter-body">
+          <div class="controls">
+            <div class="control-group">
+              <label class="label">Upload image</label>
+              <input id="fileInput" type="file" accept="image/*" />
+            </div>
+
+            <div class="control-group">
+              <label for="density" class="label">
+                Stroke density
+                <span class="hint">(more = heavier paint)</span>
+              </label>
+              <input id="density" type="range" min="0.1" max="1.2" step="0.05" value="0.5" />
+            </div>
+
+            <div class="control-group">
+              <label for="size" class="label">
+                Stroke size
+                <span class="hint">(larger = chunkier strokes)</span>
+              </label>
+              <input id="size" type="range" min="3" max="20" step="1" value="8" />
+            </div>
+
+            <button id="downloadBtn" disabled>Download PNG</button>
+          </div>
+
+          <div class="canvas-wrapper">
+            <canvas id="canvas"></canvas>
+            <p class="canvas-hint">
+              Tip: Use square images (e.g. 1024×1024 bakes) for texture work. The
+              output has a black background by default to blend with dark stone.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>
+        Built as a lightweight filter lab – you can add more filters as new cards
+        alongside the Painterly Stroke Filter.
+      </p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
