@@ -11,11 +11,23 @@ fileInput.addEventListener("change", handleFile);
 densitySlider.addEventListener("input", () => sourceImage && paintify());
 sizeSlider.addEventListener("input", () => sourceImage && paintify());
 downloadBtn.addEventListener("click", () => {
+  const nameInput = document.getElementById("filename");
+  let filename = nameInput.value.trim();
+
+  // fallback
+  if (!filename) filename = "painterly";
+
+  // ensure .png extension
+  if (!filename.toLowerCase().endsWith(".png")) {
+    filename += ".png";
+  }
+
   const link = document.createElement("a");
-  link.download = "painterly.png";
+  link.download = filename;
   link.href = canvas.toDataURL("image/png");
   link.click();
 });
+
 
 function handleFile(e) {
   const file = e.target.files[0];
